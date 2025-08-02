@@ -1,19 +1,18 @@
 class Solution {
     public int rob(int[] nums) {
-        int n = nums.length;
-        int[] dp = new int[n+1];
-        Arrays.fill(dp,-1);
-        return MaxSum(n-1,nums,dp);
+        Integer[] dp = new Integer[nums.length + 1];
+
+        return help(nums,nums.length-1,dp);
     }
 
-    private int MaxSum(int idx, int[] arr,int[] dp){
-        if(idx < 0) return 0;
-        if(idx == 0) return arr[0];
-        
-        if(dp[idx] != -1 ) return dp[idx];
-        
-        if(idx == 0) return dp[0] = arr[0];
-        
-        return dp[idx] = Math.max(arr[idx] + MaxSum(idx-2,arr,dp),MaxSum(idx-1, arr,dp));
+    public int help(int[] nums, int i, Integer[] dp){
+        if(i < 0) return 0;
+        if(i == 0) return dp[i] = nums[i];
+        if(dp[i] != null) return dp[i];
+
+        int take = nums[i] + help(nums, i-2, dp);
+        int notTake = help(nums, i-1, dp);
+
+        return dp[i] = Math.max(take,notTake);
     }
 }
