@@ -1,12 +1,26 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
         int n = nums.length;
-        Integer[] lis = new Integer[n];
+        ArrayList<Integer> lis = new ArrayList<>();
 
-        int ans = 1;
-        for(int i=1;i<n;i++){
-            ans = Math.max(lisEndAtIdx(nums, i, lis), ans);
+        lis.add(Integer.MIN_VALUE);
+
+        for(int i=1;i<=n;i++){
+            lis.add(Integer.MAX_VALUE);
         }
+
+        int ans = 0;
+        for(int i=0;i<n;i++){
+
+            //lower bound  //first index such that ele at index is greater than the current number
+            int idx = Collections.binarySearch(lis, nums[i]);
+            if(idx < 0) idx = -(idx+1);
+
+            if(lis.get(idx) == Integer.MAX_VALUE) ans++;
+            if(lis.get(idx) > nums[i]) lis.set(idx, nums[i]);
+        }
+
+
         return ans;
     }
 
