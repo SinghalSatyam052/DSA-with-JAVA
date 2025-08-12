@@ -11,11 +11,9 @@ class Solution {
         for(int i:map.keySet()){
             List<Integer> group = new ArrayList<>();
             for(int j=0;j<map.get(i).size();j++){
-                if(j % i == 0){
-                    if(group.size() != 0){
-                        ans.add(group);
-                        group = new ArrayList<>();
-                    } 
+                if(j % i == 0 && group.size() != 0){
+                    ans.add(group);
+                    group = new ArrayList<>();
                 }
                 group.add(map.get(i).get(j));
             }
