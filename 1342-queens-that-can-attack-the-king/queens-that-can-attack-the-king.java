@@ -91,10 +91,4 @@ class Solution {
         return ans;
     }
 
-    private boolean find(int i, int j, int[][] queens){
-        for(int[] cord: queens){
-            if(cord[0] == i && cord[1] == j) return true;
-        }
-        return false;
-    }
 }
