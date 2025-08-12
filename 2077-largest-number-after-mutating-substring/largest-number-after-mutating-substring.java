@@ -2,13 +2,14 @@ class Solution {
     public String maximumNumber(String num, int[] change) {
         char[] arr = num.toCharArray();
         int n = arr.length;
-        boolean mutated = false;
         for(int i=0;i<n;i++){
-            int idx = (int)(arr[i]-'0');
-            if(idx < change[idx]){
-                arr[i] = (char)( change[idx]+'0');
-                mutated = true;
-            }else if(idx > change[idx] && mutated) break;
+            if (arr[i] - '0' < change[arr[i] - '0']) {
+                while(i<n && arr[i]-'0' <= change[(arr[i]-'0')]){
+                    arr[i] = (char)(change[(arr[i]-'0')]+'0');
+                    i++;
+                }
+                break;
+            }
         }
 
         return new String(arr);
