@@ -1,13 +1,20 @@
 class Solution {
     public String convertToBase7(int num) {
-        if(num == 0) return "0";
-        if(num < 0) return "-"+convertToBase7(Math.abs(num));
-
-        StringBuilder ans  = new StringBuilder();
-        while(num > 0){
-            ans.append(num%7);
-            num/=7;
+         if(num==0){
+            return "0";
         }
-        return ans.reverse().toString();
+         StringBuilder str = new StringBuilder();
+        boolean neg = false;
+
+        if (num < 0) neg = true;
+        num = Math.abs(num);
+
+        while (num > 0) {
+            str.append(num % 7);
+            num = num / 7;
+        }
+
+        if (neg) str.append("-");
+        return str.reverse().toString();
     }
 }
